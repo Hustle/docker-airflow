@@ -55,13 +55,13 @@ RUN set -ex \
     && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
     && useradd -ms /bin/bash -d ${AIRFLOW_USER_HOME} airflow \
     && pip install -U pip setuptools wheel \
-    && pip install pytz \
-    && pip install pyOpenSSL \
-    && pip install ndg-httpsclient \
-    && pip install pyasn1 \
-    && pip install apache-airflow[crypto,celery,postgres,hive,jdbc,mysql,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
-    && pip install 'redis==3.2' \
-    && if [ -n "${PYTHON_DEPS}" ]; then pip install ${PYTHON_DEPS}; fi \
+    && pip install --use-deprecated=legacy-resolver pytz \
+    && pip install --use-deprecated=legacy-resolver pyOpenSSL \
+    && pip install --use-deprecated=legacy-resolver ndg-httpsclient \
+    && pip install --use-deprecated=legacy-resolver pyasn1 \
+    && pip install --use-deprecated=legacy-resolver apache-airflow[crypto,celery,postgres,hive,jdbc,mysql,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
+    && pip install --use-deprecated=legacy-resolver 'redis==3.2' \
+    && if [ -n "${PYTHON_DEPS}" ]; then pip install --use-deprecated=legacy-resolver ${PYTHON_DEPS}; fi \
     && apt-get purge --auto-remove -yqq $buildDeps \
     && apt-get autoremove -yqq --purge \
     && apt-get clean \
